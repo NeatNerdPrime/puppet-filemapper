@@ -272,7 +272,7 @@ module PuppetX::FileMapper
         pre_flush_hook(filename) if respond_to? :pre_flush_hook
 
         begin
-          file_contents.empty? && unlink_empty_files ? remove_empty_file(filename) : perform_write(filename, file_contents)
+          (file_contents.empty? && unlink_empty_files) ? remove_empty_file(filename) : perform_write(filename, file_contents)
         ensure
           post_flush_hook(filename) if respond_to? :post_flush_hook
         end

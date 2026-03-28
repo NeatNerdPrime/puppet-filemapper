@@ -30,6 +30,7 @@ describe PuppetX::FileMapper do
   let(:single_file_provider) do
     dummytype.provide(:single) do
       include PuppetX::FileMapper
+
       def self.target_files
         ['/single/file/provider']
       end
@@ -51,6 +52,7 @@ describe PuppetX::FileMapper do
   let(:multiple_file_provider) do
     dummytype.provide(:multiple, resource_type: dummytype) do
       include PuppetX::FileMapper
+
       def self.target_files
         ['/multiple/file/provider-one', '/multiple/file/provider-two']
       end
@@ -124,6 +126,7 @@ describe PuppetX::FileMapper do
       subject do
         dummytype.provide(:incomplete) do
           include PuppetX::FileMapper
+
           def self.target_files; end
         end
       end
@@ -135,6 +138,7 @@ describe PuppetX::FileMapper do
       subject do
         dummytype.provide(:incomplete) do
           include PuppetX::FileMapper
+
           def self.target_files; end
 
           def self.parse_file(_filename, _content); end
@@ -152,6 +156,7 @@ describe PuppetX::FileMapper do
       subject do
         dummytype.provide(:incomplete) do
           include PuppetX::FileMapper
+
           def self.target_files; end
 
           def self.parse_file(_filename, _content); end
@@ -266,7 +271,7 @@ describe PuppetX::FileMapper do
 
     [
       { name: 'yay', dummy_property: 'baz' },
-      { name: 'whee', dummy_property: 'wat' }
+      { name: 'whee', dummy_property: 'wat' },
     ].each do |values|
       it "matches hash values to provider properties for #{values[:name]}" do
         provs = subject.instances
